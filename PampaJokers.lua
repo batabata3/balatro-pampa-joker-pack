@@ -294,7 +294,7 @@ function SMODS.INIT.MtlJokers()
             cost = 4,
             name = "Cherry",
             set = "Joker",
-            config = {extra={mult_gain=12,pairs_discarded=0,hands_limit=12}},
+            config = {extra={mult_gain=2,pairs_discarded=0,hands_limit=12}},
             pos = {x=2,y=0},
             atlas = "MTLJoker"
         },
