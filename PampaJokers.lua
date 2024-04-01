@@ -875,44 +875,6 @@ local calculate_jokerref = Card.calculate_joker
 function Card.calculate_joker(self, context)
     local calc_ref = calculate_jokerref(self, context)
     if self.ability.set == "Joker" and not self.debuff then
-        -- if self.ability.name == "Blueprint" then
-        --     local other_joker = nil
-        --     for i = 1, #G.jokers.cards do
-        --         if G.jokers.cards[i] == self then
-        --             other_joker = G.jokers.cards[i + 1]
-        --         end
-        --     end
-        --     if other_joker and other_joker ~= self then
-        --         context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1
-        --         context.blueprint_card = context.blueprint_card or self
-        --         if context.blueprint > #G.jokers.cards + 1 then
-        --             return
-        --         end
-        --         local other_joker_ret = other_joker:calculate_joker(context)
-        --         if other_joker_ret then
-        --             other_joker_ret.card = context.blueprint_card or self
-        --             other_joker_ret.colour = G.C.BLUE
-        --             return other_joker_ret
-        --         end
-        --     end
-        -- end
-        -- if self.ability.name == "Brainstorm" then
-        --     local other_joker = G.jokers.cards[1]
-        --     if other_joker and other_joker ~= self then
-        --         context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1
-        --         context.blueprint_card = context.blueprint_card or self
-        --         if context.blueprint > #G.jokers.cards + 1 then
-        --             return
-        --         end
-        --         local other_joker_ret = other_joker:calculate_joker(context)
-        --         if other_joker_ret then
-        --             other_joker_ret.card = context.blueprint_card or self
-        --             other_joker_ret.colour = G.C.RED
-        --             return other_joker_ret
-        --         end
-        --     end
-        -- end
-
         if context.open_booster then
         elseif context.buying_card then
         elseif context.selling_self then
@@ -1817,7 +1779,7 @@ function Card:remove_from_deck(from_debuff)
     sendDebugMessage("remove from deck")
     local rem_ref = remove_from_deckref(self, from_debuff)
     if self.ability.name== "Fabric Design" then
-        if self.ability.extra.added_to_deck then
+        if self.ability.extra.added_to_deck then --dirty workaround because self.added_to_deck doesn't work ??
             --turn cards to normal
             if (G.playing_cards) then
                 for i=1, #G.playing_cards do
