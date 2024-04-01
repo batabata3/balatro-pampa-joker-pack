@@ -1153,12 +1153,6 @@ function Card.calculate_joker(self, context)
                                 if (G.jokers.cards[i].ability.eternal) then
                                     n_eternal=n_eternal+1
                                 else
-                                    --check if the joker is not eternel and negative => number of allowed joker will go down
-                                    if self.edition then
-                                        if G.jokers.cards[i].edition.type == 'negative' then
-                                            n_negative=n_negative+1
-                                        end
-                                    end
                                     G.jokers.cards[i]:start_dissolve()
                                 end
                             end
