@@ -168,7 +168,7 @@ let jokers = [
   {
     name: "Snecko Eye",
     text: [
-      "{C:red} -1 hand size{C:inactive}.",
+      "{C:red} -2 hand size{C:inactive}.",
       "The ranks of first drawn cards",
       "each round are randomized.",
     ],
@@ -199,7 +199,7 @@ let jokers = [
   {
     name: "Self Portrait",
     text: [
-      "Unscoring face cards turn",
+      "First unscoring face card turns",
       "into a random non-face rank."
     ],
     image_url: "img/self_portrait_2x.png",
