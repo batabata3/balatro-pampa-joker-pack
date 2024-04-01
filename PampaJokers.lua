@@ -406,7 +406,7 @@ function SMODS.INIT.MtlJokers()
             cost = 8,
             name = "Fabric Design",
             set = "Joker",
-            config = {},
+            config = {extra={added_to_deck=false}},
             pos = { x = 7, y = 2 },
             atlas = "MTLJoker"
         },
@@ -966,6 +966,7 @@ function Card.calculate_joker(self, context)
                     end
                 })) 
             elseif self.ability.name == 'Fabric Design' then
+                self.ability.extra.added_to_deck = true --not the right place for this but eh
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                     play_sound('tarot1')
                     return true end }))
@@ -1816,17 +1817,21 @@ function Card:remove_from_deck(from_debuff)
     sendDebugMessage("remove from deck")
     local rem_ref = remove_from_deckref(self, from_debuff)
     if self.ability.name== "Fabric Design" then
-        --turn cards to normal
-        if (G.playing_cards) then
-            for i=1, #G.playing_cards do
-                local card = G.playing_cards[i]
-                card:set_ability(G.P_CENTERS.c_base, nil, true)
-            end  
+        if self.ability.extra.added_to_deck then
+            --turn cards to normal
+            if (G.playing_cards) then
+                for i=1, #G.playing_cards do
+                    local card = G.playing_cards[i]
+                    card:set_ability(G.P_CENTERS.c_base, nil, true)
+                end  
+            end
         end
     end
     if self.added_to_deck then
         sendDebugMessage("self added to deck")
         self.added_to_deck = false
+            -- 
+
         if self.ability.h_size ~= 0 then
             G.hand:change_size(-self.ability.h_size)
         end
@@ -1930,7 +1935,7 @@ function Card.generate_UIBox_ability_table(self)
             loc_vars = {''..(G.GAME and G.GAME.probabilities.normal or 1), self.ability.extra.odds}
             customJoker = true       
         elseif self.ability.name == 'Cherry' then
-            loc_vars = {self.ability.extra.mult_gain, self.ability.extra.pairs_discarded, self.ability.extra.hands_limit-self.ability.extra.pairs_discarded}
+            loc_vars = {self.ability.extra.mult_gain, self.ability.extra.pairs_discarded*self.ability.extra.mult_gain, self.ability.extra.hands_limit-self.ability.extra.pairs_discarded}
             customJoker = true
         elseif self.ability.name == 'Subway Map' then
             if self.ability.extra.hand== 14 then loc_vars = {self.ability.extra.mult_gain, self.ability.extra.mult, "A"} 
