@@ -52,7 +52,7 @@ let jokers = [
   {
     name: "Matryoshka",
     text: [
-      "{C:blue}+25{} chips for each unique",
+      "{C:blue}+30{} chips for each unique",
       "scoring hand size played this round"
     ],
     image_url: "img/joker_matryoshka_2x.png",
@@ -168,9 +168,8 @@ let jokers = [
   {
     name: "Snecko Eye",
     text: [
-      "{C:red} -2 hand size{C:inactive}.",
       "The ranks of first drawn cards",
-      "each round are randomized.",
+      "each round are permanently randomized.",
     ],
     image_url: "img/snecko_eye_2x.png",
     rarity: "Uncommon"
@@ -219,7 +218,7 @@ let jokers = [
   {
     name: "Grand Slam",
     text: [
-      "{X:mult,C:white}x1{} Mult for each",
+      "{X:mult,C:white}x0.5{} Mult for each",
       "unique flush suit played this round ",
     ],
     image_url: "img/joker_open_2x.png",
