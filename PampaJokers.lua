@@ -83,7 +83,7 @@ function SMODS.INIT.MtlJokers()
             cost = 6,
             name = "Snecko Eye",
             set = "Joker",
-            config = {h_size=-2,extra ={deck=false}},
+            config = {h_size=0,extra ={deck=false}},
             pos = { x = 5, y = 1 },
             atlas = "MTLJoker"
         },
@@ -350,7 +350,7 @@ function SMODS.INIT.MtlJokers()
             cost = 5,
             name = "Matryoshka",
             set = "Joker",
-            config = {extra={chips=25,size_list={}}},
+            config = {extra={chips=30,size_list={}}},
             pos = {x=2,y=1},
             atlas = "MTLJoker"
         },
@@ -420,7 +420,7 @@ function SMODS.INIT.MtlJokers()
                 cost = 6,
                 name = "Grand Slam",
                 set = "Joker",
-                config = {extra={xmult_gain=1,played_suits={},n_played_suits=0}},
+                config = {extra={xmult_gain=0.5,played_suits={},n_played_suits=0}},
                 pos = {x=8,y=0},
                 atlas = "MTLJoker"
         },
@@ -529,9 +529,8 @@ function SMODS.INIT.MtlJokers()
         j_snecko = {
             name = "Snecko Eye",
             text = {
-                "{C:red} #1# hand size{C:inactive}.",
                 "The ranks of first drawn cards",
-                "each round are randomized.",
+                "each round are permanently randomized.",
             }
         },
         j_trick = {
@@ -671,10 +670,10 @@ function SMODS.INIT.MtlJokers()
         j_konbini = {
             name = "Konbini",
             text = {
-                "Gains +{C:mult}#1#{} mult",
+                "Gains {C:mult}+#1#{} mult",
                 "per unique {C:tarot}Tarot{}",
                 "card used this run",
-                "{C:inactive}(Currently +{C:mult}#2#{}){}"
+                "{C:inactive}(Currently {C:mult}+#2#{}){}"
             }
         },
 
@@ -1699,8 +1698,8 @@ function Card.calculate_joker(self, context)
                             
                             -- compute score using the number of suits in the list
                             return {
-                                message = localize{type='variable',key='a_xmult',vars={math.max((self.ability.extra.n_played_suits)*self.ability.extra.xmult_gain,1)}},
-                                Xmult_mod = math.max(self.ability.extra.n_played_suits*self.ability.extra.xmult_gain,1)
+                                message = localize{type='variable',key='a_xmult',vars={math.max(1+self.ability.extra.n_played_suits*self.ability.extra.xmult_gain,1)}},
+                                Xmult_mod = math.max(1+self.ability.extra.n_played_suits*self.ability.extra.xmult_gain,1)
                             }
 
                         elseif self.ability.name== "Pimp The Bus" and self.ability.x_mult > 0 then
@@ -1940,7 +1939,7 @@ function Card.generate_UIBox_ability_table(self)
                     suit_string=suit_string .. self.ability.extra.played_suits[i] .. " "
                 end
             end
-            loc_vars = {self.ability.extra.xmult_gain,math.max(self.ability.extra.n_played_suits,1),suit_string}
+            loc_vars = {self.ability.extra.xmult_gain,math.max(1+self.ability.extra.n_played_suits*self.ability.extra.xmult_gain,1),suit_string}
             customJoker = true
         elseif self.ability.name == 'Snecko Eye' then
             loc_vars = {self.ability.h_size}

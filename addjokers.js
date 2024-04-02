@@ -189,7 +189,7 @@ let jokers = [
   {
     name: "Mahjong Joker",
     text: [
-      "Gains {X:mult,C:white} X0.2 {} Mult for",
+      "Gains {X:mult,C:white} X0.3 {} Mult for",
       "every 3 hands containing",
       "{C:attention}Three of a Kind{}",
     ],
