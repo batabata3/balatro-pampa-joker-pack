@@ -17,33 +17,10 @@ function table_length(table)
 end
 
 
---Make sure added rank isn't used in base decks
-local start_runRef = G.start_run
-function G:start_run(args)
-    args = args or {}
-
-    -- init deck
-    start_runRef(self, args)
-        local saveTable = args.savetext or nil
-        if not saveTable then -- check new game
-            if true then
-                local removed_cards = {}
-                for i=1, #G.playing_cards do
-                    if G.playing_cards[i].base.value == '13' then 
-                        removed_cards[#removed_cards+1] = G.playing_cards[i]
-                    end
-                end
-                for i=#removed_cards, 1, -1 do
-                    removed_cards[i]:remove()
-                end
-                G.starting_deck_size = #G.playing_cards
-            end
-        end
-end
 
 
 
-function SMODS.INIT.MtlJokers()
+function SMOD.INIT.MtlJokers()
     local mtlJokers = {
         j_jazztrio = {
             order = 151,
