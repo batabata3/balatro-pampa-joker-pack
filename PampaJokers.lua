@@ -21,6 +21,15 @@ end
 
 
 function SMODS.INIT.MtlJokers()
+
+     -- Localization
+    G.localization.misc.dictionary.pampa_bye = "Bye Bye !"
+    G.localization.misc.dictionary.k_upgrade_ex_claw = "Upgrade all 3s !"
+    G.localization.misc.dictionary.ph_black_star = "Saved by Black Star"
+    G.localization.misc.v_dictionary.sliding_joker = {"+#1# mult ! +#2# chips !"}
+
+    init_localization()
+    
     local mtlJokers = {
         j_jazztrio = {
             order = 151,
@@ -713,19 +722,11 @@ function SMODS.INIT.MtlJokers()
         }
     }
 
-    local dicLocalization = { pampa_bye="Bye Bye !",k_upgrade_ex_claw = "Upgrade all 3s !",ph_black_star = "Saved by Black Star",}
-    local dicLocalization2= { sliding_joker={"+#1# mult ! +#2# chips !"}}
-
-
+   
     for k, v in pairs(jokerLocalization) do
         G.localization.descriptions.Joker[k] = v
     end
-    for k, v in pairs(dicLocalization) do
-        G.localization.misc.dictionary[k] = v
-    end
-    for k, v in pairs(dicLocalization2) do
-        G.localization.misc.v_dictionary[k] = v
-    end
+  
     -- Update localization
     for g_k, group in pairs(G.localization) do
         if g_k == 'descriptions' then
