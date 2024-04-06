@@ -20,7 +20,7 @@ end
 
 
 
-function SMOD.INIT.MtlJokers()
+function SMODS.INIT.MtlJokers()
     local mtlJokers = {
         j_jazztrio = {
             order = 151,
