@@ -245,7 +245,7 @@ function SMODS.INIT.MtlJokers()
             order = 166,
             unlocked = true,
             discovered = true,
-            blueprint_compat = true,
+            blueprint_compat = false,
             eternal_compat = false,
             rarity = 1,
             cost = 5,
