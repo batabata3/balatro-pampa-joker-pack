@@ -1424,36 +1424,24 @@ function Card.calculate_joker(self, context)
                             end
                         end
                     elseif self.ability.name == 'Subway Map' and next(context.poker_hands["Straight"]) and not context.blueprint then
-                        local higher_rank=0
-                        local broadway=false
+                        local broadway_check=false
+                        local rank_table={}
                         for i = 1, #context.scoring_hand do
-                            local has_q=false
-                            local has_k=false
-                            local has_j=false
-                            current_rank=context.scoring_hand[i]:get_id()
-                            sendDebugMessage("Rank in card "..current_rank)
-                            if current_rank==11 then has_j=true end
-                            if current_rank==12 then has_q=true end
-                            if current_rank==13 then has_k=true end
-
-                            if (current_rank==14 and (has_j or has_q or has_k)) then 
-                                broadway=true
-                            else
-                                higher_rank=math.max(higher_rank,current_rank) 
-                                sendDebugMessage("Higher rank "..higher_rank)
-                            end
-                            sendDebugMessage("Rank in card "..current_rank)
+                            table.insert(rank_table,context.scoring_hand[i]:get_id())
+                            if context.scoring_hand[i]:get_id()==11 or context.scoring_hand[i]:get_id()==12 or context.scoring_hand[i]:get_id()==13 then broadway_check=true end 
                         end
-                        if broadway then
-                            --14 is the highest rank
-                            higher_rank=14
+                        table.sort(rank_table, function(a,b) return a>b end)
+                        local highest_rank=rank_table[1]
+                        if highest_rank==14 and not broadway_check then
+                            highest_rank=rank_table[2]
                         end
+                        sendDebugMessage("Highest rank "..highest_rank)
 
                         sendDebugMessage("previoous rank "..self.ability.extra.hand)
-                        if (higher_rank> self.ability.extra.hand) then
+                        if (highest_rank> self.ability.extra.hand) then
                             self.ability.extra.mult = self.ability.extra.mult + self.ability.extra.mult_gain
                             sendDebugMessage("update")
-                            self.ability.extra.hand=higher_rank
+                            self.ability.extra.hand=highest_rank
                             return {
                                 message = localize('k_upgrade_ex'),
                                 colour = G.C.MULT,
