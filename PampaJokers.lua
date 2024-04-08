@@ -1525,7 +1525,7 @@ function Card.calculate_joker(self, context)
                             if (heart_number > self.ability.extra.threshold) then
                                 return {
                                     message = localize{type='variable',key='a_mult',vars={self.ability.extra.mult*(heart_number - self.ability.extra.threshold)}},
-                                    mult_mod = self.ability.extra.mult*(G.GAME.starting_deck_size - #G.playing_cards), 
+                                    mult_mod = self.ability.extra.mult*(heart_number - self.ability.extra.threshold),
                                     colour = G.C.MULT
                                 }
                             end
