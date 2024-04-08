@@ -897,10 +897,17 @@ function Card.calculate_joker(self, context)
             elseif self.ability.name == 'Bell Curve' then
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4,  func = function()
                         sendDebugMessage(#G.hand.cards)
-                        enhanced_card = pseudorandom_element(G.hand.cards, pseudoseed('bellcurve'))
-                        enhanced_card:set_ability(G.P_CENTERS.m_lucky , nil, true)
-                        play_sound('tarot1')
-                        enhanced_card:juice_up()
+                        --get non-enchanced cards in hand
+                        local non_enh_list={}
+                        for i=1, #G.hand.cards do
+                            if G.hand.cards[i].config.center == G.P_CENTERS.c_base then table.insert(non_enh_list,G.hand.cards[i]) end
+                        end
+                        if #non_enh_list>0 then
+                            enhanced_card = pseudorandom_element(non_enh_list, pseudoseed('bellcurve'))
+                            enhanced_card:set_ability(G.P_CENTERS.m_lucky , nil, true)
+                            play_sound('tarot1')
+                            enhanced_card:juice_up()
+                        end
                         return true
                     end
                 })) 
