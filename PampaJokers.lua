@@ -111,7 +111,7 @@ function SMODS.INIT.MtlJokers()
             cost = 7,
             name = "Tiger Bikini",
             set = "Joker",
-            config = { extra = {mult=4, threshold=13}},
+            config = { extra = {mult=3, threshold=13}},
             pos = { x = 1, y = 0 },
             atlas = "MTLJoker"
         },
