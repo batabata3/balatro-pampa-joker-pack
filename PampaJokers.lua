@@ -774,6 +774,11 @@ function SMODS.INIT.MtlJokers()
     --     strength_effect = { ignore = true }
     -- })   
 
+    -- JokerDisplay Integration
+
+    if _G["JokerDisplay"] then
+        NFS.load(mtl_jkr_mod.path .. "jokerdisplay_integration.lua")()
+    end
 
 end
 
